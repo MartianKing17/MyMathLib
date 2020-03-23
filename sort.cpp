@@ -144,3 +144,102 @@ T * sort_by_selection(T * data, std::size_t len)
 
     return data;
 }
+
+template <typename T>
+void copy_arr(T * to_copy, T * from_copy, std::size_t start_index, std::size_t end_index)
+{
+    for (size_t i = 0, j =start_index; j < end_index; i++,j++)
+    {
+        to_copy[i] = from_copy[j];
+    }
+}
+
+template<typename T>
+void min_max(T & num_1, T & num_2) //return num_1 - min, num_2 - max
+{
+    if (num_1 > num_2)
+    {
+        swap(num_1, num_2);
+    }
+}
+
+template<typename T>
+void merge_array(T * left, T * right, std::size_t len_left, std::size_t len_right)
+{
+    T * merge_arr = new T[len_left + len_right];
+
+    if(right[len_right - 1] < left[len_left - 1])
+    {
+        size_t i = 0;
+
+        for (size_t j = 0; j < len_right; ++j,++i)
+        {
+            merge_arr[i] = right[j];
+        }
+
+        for (size_t j = 0; j < len_left; ++j, ++i)
+        {
+            merge_arr[i] = left[j];
+        }
+    }
+    else if(left[len_left - 1] < right[len_right - 1]) {
+        size_t i = 0;
+
+        for (size_t j = 0; j < len_left; ++j, ++i) {
+            merge_arr[i] = left[j];
+        }
+
+        for (size_t j = 0; j < len_right; ++j, ++i) {
+            merge_arr[i] = right[j];
+        }
+    }
+    else
+    {
+        std::size_t left_index = 0;
+        std::size_t right_index = 0;
+
+        for (size_t j = 0; j < len_left + len_right; ++j)
+        {
+            if (left[left_index] > right[right_index]  && right_index != len_right)
+            {
+                merge_arr[j] = right[right_index];
+                ++right_index;
+            }
+            else if (left[left_index] <= right[right_index] && left_index != len_left)
+            {
+                merge_arr[j] = left[left_index];
+                ++left_index;
+            }
+            else if (left[left_index] > right[right_index]  && right_index == len_right)
+            {
+                merge_arr[j] = left[left_index];
+                ++left_index;
+            }
+            else if (left[left_index] <= right[right_index] && left_index == len_left)
+            {
+                merge_arr[j] = right[right_index];
+                ++right_index;
+            }
+        }
+    }
+
+    return merge_arr;
+}
+
+template<typename T>
+T * merge_sort(T * data, std::size_t len)
+{
+    if(len <= 2)
+    {
+        min_max(data[0] , data[1]);
+    }
+
+    const std::size_t split_arr_len = len/2;
+    T * left = new T[split_arr_len];
+    T * right = new T[split_arr_len];
+    copy_arr(left, data, 0, split_arr_len);
+    copy_arr(right, data, split_arr_len, len);
+    merge_sort(left, split_arr_len);
+    merge_sort(right, split_arr_len);
+    merge_array(left, right, data);
+}

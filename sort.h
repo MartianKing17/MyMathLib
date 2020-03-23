@@ -6,6 +6,7 @@
 #define MYMATHLIB_SORT_H
 
 #include <iostream>
+#include <list>
 
 template <typename T>
 void swap(T * first, T * second);
@@ -21,5 +22,8 @@ T * insertion_sort(T * data, std::size_t len);
 
 template <typename T>
 T * sort_by_selection(T * data, std::size_t len);
+
+template <typename T>
+T * merge_sort(T * data, std::size_t len);
 
 #endif //MYMATHLIB_SORT_H

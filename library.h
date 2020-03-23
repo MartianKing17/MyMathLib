@@ -1,8 +1,0 @@
-#ifndef MYMATHLIB_LIBRARY_H
-#define MYMATHLIB_LIBRARY_H
-
-
-
-
-
-#endif //MYMATHLIB_LIBRARY_H
