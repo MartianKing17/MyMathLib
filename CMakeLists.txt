@@ -3,4 +3,4 @@ project(MyMathLib)
 
 set(CMAKE_CXX_STANDARD 11)
 
-add_library(MyMathLib SHARED math.cpp math.h Matrix.cpp Matrix.h sort.cpp sort.h)
+add_library(MyMathLib SHARED math.cpp math.h Matrix.cpp Matrix.h sort.cpp sort.h List.cpp List.h)
